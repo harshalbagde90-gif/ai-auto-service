@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 20% 6%;
+    --foreground: 0 0% 98%;
+    --card: 240 15% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 15% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 257 100% 64%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 270 91% 65%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 15% 15%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 330 81% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 15% 20%;
+    --input: 240 15% 20%;
+    --ring: 257 100% 64%;
+    --radius: 0.75rem;
+    
+    --glow-primary: 257 100% 64%;
+    --glow-secondary: 270 91% 65%;
+    --glow-accent: 330 81% 60%;
+    --glass-bg: 240 15% 10%;
+    --glass-border: 240 15% 25%;
+    
+    --sidebar-background: 240 15% 8%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 257 100% 64%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 15% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 240 15% 20%;
+    --sidebar-ring: 257 100% 64%;
+  }
+
+  .dark {
+    --background: 240 20% 6%;
+    --foreground: 0 0% 98%;
+    --card: 240 15% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 15% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 257 100% 64%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 270 91% 65%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 15% 15%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 330 81% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 15% 20%;
+    --input: 240 15% 20%;
+    --ring: 257 100% 64%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-card/60 backdrop-blur-xl border border-border/30;
+  }
+
+  .glass-strong {
+    @apply bg-card/80 backdrop-blur-2xl border border-border/30;
+  }
+
+  .gradient-primary {
+    @apply bg-gradient-to-r from-primary to-secondary;
+  }
+
+  .gradient-accent {
+    @apply bg-gradient-to-r from-secondary to-accent;
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 40px hsl(var(--glow-primary) / 0.4);
+  }
+
+  .glow-secondary {
+    box-shadow: 0 0 40px hsl(var(--glow-secondary) / 0.4);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 30px hsl(var(--glow-primary) / 0.5);
+  }
+
+  .card-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .card-lift:hover {
+    @apply -translate-y-2;
+    box-shadow: 0 20px 40px hsl(var(--glow-primary) / 0.2);
+  }
+
+  .link-underline {
+    @apply relative;
+  }
+
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary scale-x-0 origin-right transition-transform duration-300;
+  }
+
+  .link-underline:hover::after {
+    @apply scale-x-100 origin-left;
+  }
+}
+
+@keyframes subtle-shake {
+  0%, 88% { transform: translate3d(0,0,0); }
+  90% { transform: translateX(-2px) rotateZ(-0.5deg); }
+  92% { transform: translateX(2px) rotateZ(0.5deg); }
+  94% { transform: translateX(-1px) rotateZ(-0.3deg); }
+  96% { transform: translateX(1px) rotateZ(0.3deg); }
+  100% { transform: translate3d(0,0,0); }
+}
+
+@layer components {
+  .logo-3d {
+    box-shadow:
+      0 8px 20px hsl(var(--glow-primary) / 0.35),
+      inset 0 0 14px hsl(var(--glow-primary) / 0.6);
+    transform: perspective(600px) rotateX(8deg) rotateY(-8deg);
+    transition: transform 300ms ease, box-shadow 300ms ease;
+  }
+
+  .logo-3d:hover {
+    transform: perspective(600px) rotateX(0deg) rotateY(0deg) translateY(-2px);
+    box-shadow:
+      0 10px 28px hsl(var(--glow-primary) / 0.45),
+      inset 0 0 16px hsl(var(--glow-primary) / 0.7);
+  }
+
+  .logo-shake {
+    animation: subtle-shake 5s ease-in-out infinite;
+  }
+}
