@@ -21,10 +21,61 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link id="favicon" rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      const baseFavicon = "/favicon.svg";
+      const ensureFaviconLink = () => {
+        let link = document.querySelector('link[rel="icon"]');
+        if (!link) {
+          link = document.createElement("link");
+          link.rel = "icon";
+          document.head.appendChild(link);
+        }
+        link.type = "image/svg+xml";
+        return link;
+      };
+      const setFavicon = (href) => {
+        const link = ensureFaviconLink();
+        link.href = href;
+      };
+      const svgFor = (dx = 0, rot = 0) => {
+        return `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#C026D3"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(${dx},0) rotate(${rot},32,32)">
+    <rect x="4" y="4" width="56" height="56" rx="12" fill="url(#g)"/>
+    <text x="32" y="41" text-anchor="middle" font-size="34" font-family="Inter, system-ui, sans-serif" fill="#ffffff" font-weight="700">N</text>
+  </g>
+</svg>`;
+      };
+      const shakeOnce = () => {
+        const frames = [
+          [-2, -0.8],
+          [2, 0.8],
+          [-1, -0.4],
+          [1, 0.4],
+          [0, 0],
+        ];
+        frames.forEach(([dx, rot], i) => {
+          setTimeout(() => {
+            const svg = svgFor(dx, rot);
+            setFavicon("data:image/svg+xml;utf8," + encodeURIComponent(svg));
+          }, i * 80);
+        });
+        setTimeout(() => setFavicon(baseFavicon), frames.length * 80 + 20);
+      };
+      setFavicon(baseFavicon);
+      setInterval(shakeOnce, 5000);
+    </script>
   </body>
 </html>

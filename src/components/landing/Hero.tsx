@@ -62,7 +62,7 @@ const Hero = () => {
           </div>
 
           <div
-            className="opacity-0 animate-fade-in-up mx-auto w-full max-w-sm sm:max-w-md lg:max-w-none lg:mx-0 lg:-ml-12"
+            className="opacity-0 animate-fade-in-up w-full max-w-sm sm:max-w-md lg:max-w-none justify-self-start lg:-translate-x-8 xl:-translate-x-12"
             style={{ animationDelay: '0.4s' }}
           >
             <DashboardMockup />

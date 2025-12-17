@@ -115,6 +115,10 @@
   .hover-glow:hover {
     box-shadow: 0 0 30px hsl(var(--glow-primary) / 0.5);
   }
+  .hover-glow:active,
+  .hover-glow:focus-visible {
+    box-shadow: 0 0 30px hsl(var(--glow-primary) / 0.5);
+  }
 
   .card-lift {
     @apply transition-all duration-300 ease-out;
@@ -123,6 +127,26 @@
   .card-lift:hover {
     @apply -translate-y-2;
     box-shadow: 0 20px 40px hsl(var(--glow-primary) / 0.2);
+  }
+  .card-lift:active,
+  .card-lift:focus-visible {
+    @apply -translate-y-2;
+    box-shadow: 0 20px 40px hsl(var(--glow-primary) / 0.25);
+  }
+
+  .glass:active,
+  .glass:focus-visible {
+    box-shadow: 0 0 30px hsl(var(--glow-primary) / 0.45);
+    border-color: hsl(var(--primary) / 0.5);
+  }
+
+  @media (hover: none) {
+    .glass,
+    .card-lift,
+    .hover-glow {
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
   }
 
   .link-underline {
